@@ -2,7 +2,7 @@
 
 import rclpy
 from rclpy.node import Node
-from om_msgs.msg import Query, Response, State
+from azd_kd.msg import Query, Response, State
 from pymodbus.client.sync import ModbusSerialClient
 from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadBuilder, BinaryPayloadDecoder
