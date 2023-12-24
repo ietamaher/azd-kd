@@ -6,8 +6,7 @@ from azd_kd.msg import Query, Response, State
 from pymodbus.client.sync import ModbusSerialClient
 from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadBuilder, BinaryPayloadDecoder
-import yaml
-from rclpy.exceptions import ParameterNotDeclaredException  # Add this line
+from rclpy.exceptions import ParameterNotDeclaredException 
 
 class ModbusNode(Node):
     def __init__(self):
@@ -43,9 +42,9 @@ class ModbusNode(Node):
         self.get_logger().info(f'Parity: {self.parity}')
  
         # Create subscribers and publishers
-        self.query_subscriber = self.create_subscription(Query, 'om_query0', self.query_callback, 10)
-        self.response_publisher = self.create_publisher(Response, 'om_response0', 10)
-        self.state_publisher = self.create_publisher(State, 'om_state', 10)
+        self.query_subscriber = self.create_subscription(Query, 'azd_kd_query', self.query_callback, 10)
+        self.response_publisher = self.create_publisher(Response, 'azd_kd_response', 10)
+        self.state_publisher = self.create_publisher(State, 'azd_kd_state', 10)
 
     def query_callback(self, query_msg):
         # Upon receiving a query
@@ -83,8 +82,7 @@ class ModbusNode(Node):
                 # Write the flattened data to the specified address
                 self.get_logger().info(f"Writing to Modbus: slave_id={slave_id}, write_addr={write_addr}, write_num={write_num}, data={flattened_data}")
 
-                #query = client.write_registers(write_addr, flattened_data, unit=slave_id)
-                selected_data = flattened_data[:40]
+                selected_data = flattened_data[:64]
 
                 query = client.write_registers(write_addr, selected_data, unit=slave_id)
   
