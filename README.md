@@ -24,7 +24,7 @@ The nodes should now be built and ready to use.  Remember to source the overlay 
 * In case you have multiple USB devices you can use :
 * 
 ```bash
-# ls /dev/serial/by-path/plateform-ff0005xxxxx.pcie.pci 
+$ ls /dev/serial/by-path/plateform-ff0005xxxxx.pcie.pci 
 $ ls /dev/serial/by-id/USB-Silicon_labxxxxxxxxx
 ```
 
